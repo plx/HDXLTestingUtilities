@@ -57,7 +57,7 @@ public final class DispatchSynchronizedCounter : CustomStringConvertible, Custom
   /// - parameter identifier: An arbitrary string identifying the counter (and its queue).
   ///
   @inlinable
-  required init(identifier: String) {
+  public required init(identifier: String) {
     self.identifier = identifier
     self.synchronizationQueue = DispatchQueue(
       label: "com.hdxlproject.hdxltestingutilities.DispatchSynchronizedCounter('\(identifier)')",

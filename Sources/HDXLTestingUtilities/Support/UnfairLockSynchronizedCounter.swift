@@ -67,7 +67,7 @@ public final class UnfairLockSynchronizedCounter {
   /// - parameter identifier: An arbitrary string identifying the counter.
   ///
   @inlinable
-  required init(identifier: String) {
+  public required init(identifier: String) {
     self.identifier = identifier
   }
   

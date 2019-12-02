@@ -46,7 +46,7 @@ public final class SynchronizedIndexSet : CustomStringConvertible, CustomDebugSt
   /// - parameter identifier: An arbitrary string used to identify this specific index set.
   ///
   @inlinable
-  required init(identifier: String) {
+  public required init(identifier: String) {
     self.identifier = identifier
   }
   
