@@ -11,4 +11,4 @@ Miscellaneous minor unit-testing utilities falling within three categories:
   
 (1) and (2) are both useful, but category (3) is really *why* this library exists--any error caught, here, will avoid literal hours of frustration while diving into some subtle misbehavior. Expanded commentary can be found in the [`Remarks.md` file, here](https://github.com/plx/HDXLTestingUtilities/Remarks.md).
 
-This package is part of the HDXL project family of libraries, and was originally a part of [`HDXLCommonUtilities`](https://github.com/plx/HDXLCommonUtilities). 
+This package is part of the HDXL project family of libraries, and was originally a part of [`HDXLCommonUtilities`](https://github.com/plx/HDXLCommonUtilities).

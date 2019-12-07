@@ -2,6 +2,16 @@
 
 This document contains miscellaneous *remarks* vis-a-vis the contents of the package, the Swift language and ecyosystem, and so on and so forth.
 
+## Performance Issues
+
+Swift unit tests *generally* use `Debug` builds when they execute. `Debug` builds, however, *generally* are around an order of magnitude slower when executing *generic* code--`Debug` doesn't attempt aggressive inlining, aggressive specialization, or really...aggressive anything. 
+
+This slowness imposes extreme practical difficulties for unit tests that generate a lot of example values and then verify said values--you can certainly *write* exhaustive tests, you can certainly *attempt* property-based testing, etc., but when you do, you run a risk of writing tests that run for hours.
+
+This, ironically, prevented the functionality in this library from permanent incorporation in the test suite that inspired it: I *wrote* the index/collection verification logic to validate the complex index-manipulation code in [`HDXLAlgebraicUtilities`](https://github.com/plx/HDXLAlgebraicUtilities), it *did* help shake out a lot of subtle bugs, but those tests were *far too slow* to keep around indefinitely.
+
+This doesn't make the functionality here useless--it helps tremendously when verifying a custom collection's initial implementation--but to use it you will have to think a bit strategically (different test suites, external shakedown suites, or just shifting to narrowly-targeted unit tests once the initial bugs have been shaken out).
+
 ## Index/Collection Redundancy
 
 Swift's current design for collections (a) assigns responsibility for *moving* indices to the collections but also (b) *requires* indices to know how they're ordered and, further, (c) requires *coherency* between that index-level ordering and the implicit ordering from the `Collection`, itself.

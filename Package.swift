@@ -33,5 +33,8 @@ let package = Package(
       name: "HDXLTestingUtilitiesTests",
       dependencies: ["HDXLTestingUtilities"]
     )
+  ],
+  swiftLanguageVersions: [
+    SwiftVersion.v5
   ]
 )
