@@ -206,23 +206,18 @@ public final class SynchronizedIndexSet : CustomStringConvertible, CustomDebugSt
 
 internal extension SynchronizedIndexSet {
 
-  /// Convenience vis-a-vis `os_unfair_lock_lock` and `os_unfair_lock_unlock`.
-  @inlinable
-  var lock: os_unfair_lock_t {
-    get {
-      return UnsafeMutablePointer<os_unfair_lock>(&self.synchronizationLock)
-    }
-  }
-
   /// Internal "do X while holding the lock" method; used to use the one from
   /// `HDXLCommonUtilities` but reimplemented, here, as part splitting off the
   /// testing utilities into their own package.
   @inlinable
   func perform<R>(_ work: () throws -> R) rethrows -> R {
-    let lock = self.lock
-    os_unfair_lock_lock(lock)
-    defer { os_unfair_lock_unlock(lock) }
-    return try work()
+    return try withUnsafeMutablePointer(to: &self.synchronizationLock) {
+      (lock)
+      in
+      os_unfair_lock_lock(lock)
+      defer { os_unfair_lock_unlock(lock) }
+      return try work()
+    }
   }
 
 }
